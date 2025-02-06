@@ -20,7 +20,7 @@ struct Fila createFila();
 void addChamada(struct Fila *fila);
 void finalizaChamada(struct Fila *fila);
 
-//método para inicializar uma fila
+//mÃ©todo para inicializar uma fila
 struct Fila createFila(){
     struct Fila fila;
     fila.quantAguard = 0;
@@ -31,32 +31,32 @@ struct Fila createFila(){
 void addChamada(struct Fila *fila){
     struct Chamada chamada; //cria uma chamada
 
-    srand(time(NULL)+fila->quantAguard); //coloca a seed da randomização
-    for(int i = 0; i < 8; i++)chamada.tel[i] = (rand() % 10) + '0'; //cria um telefone aleatório
-    time(&chamada.entrada); //armazena o horário que a chamada foi adicionada
+    srand(time(NULL)+fila->quantAguard); //coloca a seed da randomizaÃ§Ã£o
+    for(int i = 0; i < 8; i++)chamada.tel[i] = (rand() % 10) + '0'; //cria um telefone aleatÃ³rio
+    time(&chamada.entrada); //armazena o horÃ¡rio que a chamada foi adicionada
 
-    fila->aguard[fila->quantAguard] = chamada; //coloca a chamda no último lugar da lista
+    fila->aguard[fila->quantAguard] = chamada; //coloca a chamda no Ãºltimo lugar da lista
     fila->quantAguard++; //atualiza a quantidade de pessoas aguardando
-    printf("foi a adicionado à lista de espera o cliente número %d, telefone +55 (69)9%s\n", fila->quantAguard, fila->aguard[fila->quantAguard-1].tel);
+    printf("foi a adicionado Ã  lista de espera o cliente nÃºmero %d, telefone +55 (69)9%s\n", fila->quantAguard, fila->aguard[fila->quantAguard-1].tel);
 
 }
 
 void finalizaChamada(struct Fila *fila){
-    if(fila->quantAguard < 1){printf("Não Há nenhuma chamada para ser finalizada"); return;}
+    if(fila->quantAguard < 1){printf("NÃ£o HÃ¡ nenhuma chamada para ser finalizada"); return;}
     fila->feita[fila->quantFeita] = fila->aguard[0]; //coloca a primeira pessoa da fila na lista de atendidas
-    fila->feita[fila->quantFeita].espera = difftime(time(NULL), fila->feita[fila->quantFeita].entrada); //armazena o horário que a chamada foi finalizada
+    fila->feita[fila->quantFeita].espera = difftime(time(NULL), fila->feita[fila->quantFeita].entrada); //armazena o horÃ¡rio que a chamada foi finalizada
     fila->quantFeita++; //atualiza a quantidade de pessoas que foram atendidas
 
     //o segundo vira o primeiro, o terceiro vira o segundo e assim por diante
     for(int i = 0; i < fila->quantAguard; i++) fila->aguard[i] = fila->aguard[i+1];
 
     fila->quantAguard--; //tem menos pessoas aguardando agora
-    printf("A chamada referente ao telefone +55 (69)9%s foi finalizada após aguardar %.2f segundos\n", fila->feita[fila->quantFeita-1].tel, fila->feita[fila->quantFeita-1].espera);
+    printf("A chamada referente ao telefone +55 (69)9%s foi finalizada apÃ³s aguardar %.2f segundos\n", fila->feita[fila->quantFeita-1].tel, fila->feita[fila->quantFeita-1].espera);
 };
 
 double esperaMedia(struct Fila *fila){
     if(fila->quantFeita < 1){
-        printf("Ninguém foi atendido ainda");
+        printf("NinguÃ©m foi atendido ainda");
         return 0;
     }
     double total;
@@ -71,7 +71,7 @@ void printTable(struct Fila *fila){
     for(int i = 0; i < fila->quantAguard; i++){
         printf("n %d - telefone: +55 (69)9%s, entrada: %s", i+1, fila->aguard[i].tel, ctime(&fila->aguard[i].entrada));
     }
-    printf("Chamadas finalizadas: \n");
+    printf("\nChamadas finalizadas: \n");
     for(int i = 0; i < fila->quantFeita; i++){
         printf("n %d - telefone: +55 (69)9%s, entrada: %s, espera: %f\n", i+1, fila->feita[i].tel, ctime(&fila->feita[i].entrada), fila->feita[i].espera);
     }
@@ -95,7 +95,7 @@ int main()
 
 	printTable(&fila);
 
-	printf("Tempo médio de espera: %.2f segundos", esperaMedia(&fila));
+	printf("Tempo mÃ©dio de espera: %.2f segundos", esperaMedia(&fila));
 
 	return 0;
 }
