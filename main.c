@@ -73,7 +73,7 @@ void printTable(struct Fila *fila){
     }
     printf("\nChamadas finalizadas: \n");
     for(int i = 0; i < fila->quantFeita; i++){
-        printf("n %d - telefone: +55 (69)9%s, entrada: %s, espera: %f\n", i+1, fila->feita[i].tel, ctime(&fila->feita[i].entrada), fila->feita[i].espera);
+        printf("n %d - telefone: +55 (69)9%s, entrada: %s, espera: %.2fs\n", i+1, fila->feita[i].tel, ctime(&fila->feita[i].entrada), fila->feita[i].espera);
     }
     printf("\n");
 };
@@ -95,7 +95,7 @@ int main()
 
 	printTable(&fila);
 
-	printf("Tempo médio de espera: %.2f segundos", esperaMedia(&fila));
+	printf("Tempo médio de espera: %.2fs", esperaMedia(&fila));
 
 	return 0;
 }
